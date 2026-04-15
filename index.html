@@ -303,7 +303,50 @@ tr:hover td{background:rgba(240,250,244,.5)}
 .anamnesis-check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
 .check-item{display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--mid);cursor:pointer}
 .check-item input[type=checkbox]{accent-color:var(--g-mid);width:16px;height:16px}
-/* Responsive */
+/* ── ANNOUNCEMENT BAR ── */
+.announce-bar{background:#fff8e0;border-bottom:2px solid var(--gold);padding:10px 24px;display:none}
+.announce-bar.show{display:block}
+.announce-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.announce-item{display:flex;align-items:center;gap:8px;font-size:.88rem;color:#6b4700;font-weight:500;flex:1}
+.announce-type-urgent{color:var(--red);font-weight:700}
+.announce-type-info{color:var(--g-mid)}
+/* ── ABOUT SECTION ── */
+.about-section{padding:80px 24px;background:var(--cream)}
+.about-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.about-img-wrap{position:relative}
+.about-logo-big{width:100%;max-width:340px;background:linear-gradient(135deg,var(--g-deep) 0%,var(--g-mid) 100%);border-radius:24px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;box-shadow:var(--sh2)}
+.about-logo-big img{width:75%;height:75%;object-fit:contain;filter:brightness(0) invert(1)}
+.about-logo-big .logo-fallback{font-size:5rem;color:rgba(255,255,255,.3)}
+.about-stat-chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.about-chip{background:#fff;border:1px solid rgba(82,183,136,.2);border-radius:10px;padding:10px 16px;text-align:center;box-shadow:var(--sh1)}
+.about-chip strong{display:block;font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--g-deep)}
+.about-chip span{font-size:.72rem;color:var(--light)}
+.about-text .section-sub{max-width:100%}
+.about-doctors{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.about-doctor{display:flex;align-items:center;gap:14px;background:#fff;border-radius:12px;padding:14px 18px;border:1px solid rgba(82,183,136,.12)}
+.about-doc-avatar{width:48px;height:48px;background:linear-gradient(135deg,var(--g-mid),var(--g-soft));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.about-doc-info strong{display:block;font-size:.95rem;color:var(--g-deep);font-weight:700}
+.about-doc-info span{font-size:.78rem;color:var(--light)}
+/* ── HOURS & CONTACT ── */
+.hours-section{padding:72px 24px;background:var(--g-deep);color:#fff}
+.hours-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px}
+.hours-block h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--g-light);margin-bottom:20px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.1)}
+.hours-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.88rem}
+.hours-row:last-child{border-bottom:none}
+.hours-row .day{color:rgba(255,255,255,.7)}
+.hours-row .time{font-weight:600;color:#fff}
+.hours-row .time.closed{color:rgba(255,255,255,.35)}
+.hours-today{background:rgba(82,183,136,.2);border-radius:8px;padding:4px 10px}
+.contact-item{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:.9rem;color:rgba(255,255,255,.85)}
+.contact-icon{font-size:1.2rem;width:28px;flex-shrink:0}
+.contact-item a{color:var(--g-soft);text-decoration:none}
+.contact-item a:hover{color:#fff}
+.map-link-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(82,183,136,.2);border:1px solid rgba(82,183,136,.4);color:var(--g-soft);padding:10px 18px;border-radius:10px;text-decoration:none;font-size:.85rem;font-weight:600;margin-top:12px;transition:.2s}
+.map-link-btn:hover{background:rgba(82,183,136,.35);color:#fff}
+/* ── FOOTER ── */
+.site-footer{background:#0f2419;color:rgba(255,255,255,.5);padding:24px;text-align:center;font-size:.78rem}
+.site-footer a{color:rgba(82,183,136,.7);text-decoration:none}
+/* ── Responsive */
 @media(max-width:700px){
   .hero-inner{grid-template-columns:1fr;gap:32px}
   .quick-book-card{display:none}
@@ -313,6 +356,9 @@ tr:hover td{background:rgba(240,250,244,.5)}
   .days-grid{grid-template-columns:repeat(7,1fr)}
   .nav-tabs{display:none}
   .inv-item-row{grid-template-columns:1fr 60px 100px 40px}
+  .about-inner{grid-template-columns:1fr}
+  .about-logo-big{max-width:200px;margin:0 auto}
+  .hours-inner{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -325,11 +371,16 @@ tr:hover td{background:rgba(240,250,244,.5)}
   <span style="opacity:.6">Admin belépés: <strong>admin / admin123</strong></span>
 </div>
 
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce-bar" id="announce-bar">
+  <div class="announce-inner" id="announce-inner"></div>
+</div>
+
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a href="#" class="nav-logo" onclick="showPage('home')">
-      <div class="nav-logo-icon">🐾</div>
+      <img src="https://allatorvosdiosd.hu/wp-content/uploads/2020/05/diosdi-allatorvosi-rendelo-logo.png" alt="Diósdi Állatorvosi Rendelő" style="height:44px;width:auto" onerror="this.outerHTML='<div class=\'nav-logo-icon\'>🐾</div>'">
       <div class="nav-logo-text">
         <strong>Diósdi Állatorvosi</strong>
         <span>dr. Tóth Klára & dr. Bogó Zsófia</span>
@@ -417,6 +468,79 @@ tr:hover td{background:rgba(240,250,244,.5)}
     </div>
   </div>
 
+  <!-- RÓLUNK -->
+  <div class="about-section">
+    <div class="about-inner">
+      <div class="about-img-wrap">
+        <div class="about-logo-big">
+          <img src="https://allatorvosdiosd.hu/wp-content/uploads/2020/05/diosdi-allatorvosi-rendelo-logo.png" alt="Diósdi Állatorvosi Rendelő" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+          <div class="logo-fallback" style="display:none">🐾</div>
+        </div>
+        <div class="about-stat-chips">
+          <div class="about-chip"><strong>15+</strong><span>év tapasztalat</span></div>
+          <div class="about-chip"><strong>2</strong><span>szakorvos</span></div>
+          <div class="about-chip"><strong>Diósd</strong><span>szívében</span></div>
+          <div class="about-chip"><strong>6 nap</strong><span>nyitva/hét</span></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="section-label">Rólunk</div>
+        <h2 class="section-title">Több mint állatorvos –<br>a kisállat barátja</h2>
+        <p class="section-sub" style="margin-bottom:18px">A Diósdi Állatorvosi Rendelő évtizedek óta szolgálja a helyi gazdákat és kisállataikat. Célunk nem csupán a gyógyítás, hanem az, hogy Ön és négylábú társa valóban otthon érezze magát nálunk.</p>
+        <p class="section-sub" style="margin-bottom:24px">Kis rendelő vagyunk, ahol minden pácienst ismerünk – nemcsak a kórtörténetüket, hanem a szokásaikat, félelmeiket és kedvenc játékukat is. Ez a személyes törődés az, amit egy nagy klinikán nehéz megkapni.</p>
+        <div class="about-doctors">
+          <div class="about-doctor">
+            <div class="about-doc-avatar">👩‍⚕️</div>
+            <div class="about-doc-info">
+              <strong>dr. Tóth Klára</strong>
+              <span>Általános állatorvos · kisállat-specialista · 15+ év tapasztalat</span>
+            </div>
+          </div>
+          <div class="about-doctor">
+            <div class="about-doc-avatar">👩‍⚕️</div>
+            <div class="about-doc-info">
+              <strong>dr. Bogó Zsófia</strong>
+              <span>Állatorvos · belgyógyászat · egzotikus állatok</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NYITVATARTÁS + ELÉRHETŐSÉG + TÉRKÉP -->
+  <div class="hours-section">
+    <div class="hours-inner">
+      <div class="hours-block">
+        <h3>🕐 Nyitvatartás</h3>
+        <div class="hours-row" id="hr-mon"><span class="day">Hétfő</span><span class="time">8:00–10:00 | 17:00–19:00</span></div>
+        <div class="hours-row" id="hr-tue"><span class="day">Kedd</span><span class="time">9:00–11:00 | 17:00–19:00</span></div>
+        <div class="hours-row" id="hr-wed"><span class="day">Szerda</span><span class="time">17:00–19:00</span></div>
+        <div class="hours-row" id="hr-thu"><span class="day">Csütörtök</span><span class="time">8:00–11:00 | 17:00–19:00</span></div>
+        <div class="hours-row" id="hr-fri"><span class="day">Péntek</span><span class="time">9:00–11:00 | 16:00–20:00</span></div>
+        <div class="hours-row" id="hr-sat"><span class="day">Szombat</span><span class="time">8:00–11:00</span></div>
+        <div class="hours-row" id="hr-sun"><span class="day">Vasárnap</span><span class="time closed">Zárva</span></div>
+        <p style="font-size:.75rem;color:rgba(255,255,255,.4);margin-top:14px">* Sürgős esetben telefonon egyeztetnek</p>
+      </div>
+      <div class="hours-block">
+        <h3>📍 Elérhetőség</h3>
+        <div class="contact-item"><span class="contact-icon">📍</span><span>2049 Diósd<br><span style="font-size:.78rem;opacity:.6">Pontos cím az oldalon</span></span></div>
+        <div class="contact-item"><span class="contact-icon">📞</span><a href="tel:+3623381900">+36 23 381 900</a></div>
+        <div class="contact-item"><span class="contact-icon">📧</span><a href="mailto:info@allatorvosdiosd.hu">info@allatorvosdiosd.hu</a></div>
+        <div class="contact-item"><span class="contact-icon">🌐</span><a href="https://allatorvosdiosd.hu" target="_blank">allatorvosdiosd.hu</a></div>
+        <a href="https://www.google.com/maps/search/Di%C3%B3sdi+%C3%81llatorvosi+Rendel%C5%91" target="_blank" class="map-link-btn">🗺️ Megnyitás Google Maps-en</a>
+      </div>
+      <div class="hours-block">
+        <h3>🗺️ Térkép</h3>
+        <iframe
+          src="https://maps.google.com/maps?q=Di%C3%B3sd,+Magyarorsz%C3%A1g&output=embed&z=14"
+          width="100%" height="220" style="border:0;border-radius:12px;filter:grayscale(20%)" allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+
   <div class="callback-section">
     <div class="callback-inner">
       <div class="section-label">Visszahívás kérés</div>
@@ -445,6 +569,16 @@ tr:hover td{background:rgba(240,250,244,.5)}
       </div>
     </div>
   </div>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div style="margin-bottom:8px">
+      <strong style="color:rgba(255,255,255,.7)">Diósdi Állatorvosi Rendelő</strong> &nbsp;·&nbsp;
+      2049 Diósd &nbsp;·&nbsp;
+      <a href="tel:+3623381900">+36 23 381 900</a> &nbsp;·&nbsp;
+      <a href="mailto:info@allatorvosdiosd.hu">info@allatorvosdiosd.hu</a>
+    </div>
+    <div>© 2026 Diósdi Állatorvosi Rendelő &nbsp;·&nbsp; <a href="https://allatorvosdiosd.hu">allatorvosdiosd.hu</a></div>
+  </footer>
 </div><!-- /page-home -->
 
 <!-- ═══════════════════════ BOOKING WIZARD ═══════════════════════ -->
@@ -713,6 +847,7 @@ tr:hover td{background:rgba(240,250,244,.5)}
         <button class="admin-tab-btn" onclick="switchAdminTab('waiting')">🏥 Várólista</button>
         <button class="admin-tab-btn" onclick="switchAdminTab('callbacks')">📞 Visszahívások</button>
         <button class="admin-tab-btn" onclick="switchAdminTab('invoice')">🧾 Számla</button>
+        <button class="admin-tab-btn" onclick="switchAdminTab('news')">📢 Hírek / Zárva</button>
         <button class="admin-tab-btn" onclick="switchAdminTab('email-preview')">📧 Email preview</button>
       </div>
 
@@ -785,6 +920,37 @@ tr:hover td{background:rgba(240,250,244,.5)}
         </div>
       </div>
 
+      <!-- Tab: News -->
+      <div class="admin-tab" id="tab-news">
+        <h3 style="font-family:'Playfair Display',serif;color:var(--g-deep);margin-bottom:8px">📢 Hírek és bejelentések</h3>
+        <p style="font-size:.85rem;color:var(--light);margin-bottom:24px">A bejelentések sárga sávban jelennek meg minden látogató számára az oldal tetején — azonnal, mentés után.</p>
+        <div style="background:var(--cream);border-radius:16px;padding:24px;border:1px solid rgba(82,183,136,.12);margin-bottom:24px">
+          <h4 style="font-size:.9rem;color:var(--g-deep);margin-bottom:16px;font-weight:700">➕ Új bejelentés</h4>
+          <div style="display:grid;grid-template-columns:120px 1fr auto;gap:12px;align-items:end">
+            <div class="form-group" style="margin:0">
+              <label>Típus</label>
+              <select id="news-type">
+                <option value="urgent">🚨 Zárva / Sürgős</option>
+                <option value="info">ℹ️ Tájékoztató</option>
+                <option value="good">🎉 Örömhír</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin:0">
+              <label>Szöveg</label>
+              <input type="text" id="news-text" placeholder="Pl. Szabadság miatt 2026. aug. 12–16. ZÁRVA vagyunk.">
+            </div>
+            <button class="btn-big-green" style="padding:12px 20px;white-space:nowrap;margin:0" onclick="addAnnouncement()">📢 Közzétesz</button>
+          </div>
+        </div>
+        <h4 style="font-size:.9rem;color:var(--g-deep);margin-bottom:12px;font-weight:700">Aktív bejelentések</h4>
+        <div id="news-list-admin">
+          <p style="color:var(--light);font-size:.85rem">Nincs aktív bejelentés.</p>
+        </div>
+        <div style="background:#fff8e8;border:1px solid #f0cc6a;border-radius:10px;padding:12px 16px;font-size:.82rem;color:#8a6200;margin-top:20px">
+          💡 <strong>Tipp:</strong> Szabadság, ünnepnap, rendkívüli zárva tartás — ezeket itt tegye ki, és minden látogató azonnal látja. Az időpontfoglaló értesítőben is megjelenik.
+        </div>
+      </div>
+
       <!-- Tab: Email preview -->
       <div class="admin-tab" id="tab-email-preview">
         <h3 style="font-family:'Playfair Display',serif;color:var(--g-deep);margin-bottom:8px">📧 Email visszaigazolás – így látja a gazdi</h3>
@@ -843,6 +1009,71 @@ tr:hover td{background:rgba(240,250,244,.5)}
 <div class="toast" id="toast"></div>
 
 <script>
+// ═══════════════════════ ANNOUNCEMENTS ═══════════════════════
+let mockAnnouncements = [
+  { id:1, type:'info', text:'🎉 Mostantól online is lehet időpontot foglalni! Próbálja ki a Foglalás menüben.' }
+];
+
+function renderAnnouncements() {
+  const bar = document.getElementById('announce-bar');
+  const inner = document.getElementById('announce-inner');
+  if (!mockAnnouncements.length) { bar.classList.remove('show'); return; }
+  bar.classList.add('show');
+  inner.innerHTML = mockAnnouncements.map(a => {
+    const icons = { urgent:'🚨', info:'ℹ️', good:'🎉' };
+    const cls = a.type === 'urgent' ? 'announce-type-urgent' : a.type === 'good' ? 'announce-type-info' : 'announce-type-info';
+    return `<div class="announce-item"><span style="font-size:1rem">${icons[a.type]||'📢'}</span><span class="${cls}">${a.text}</span></div>`;
+  }).join('') + `<span style="font-size:.75rem;color:#8a6200;cursor:pointer;white-space:nowrap" onclick="document.getElementById('announce-bar').classList.remove('show')">✕ Bezár</span>`;
+}
+
+function addAnnouncement() {
+  const text = document.getElementById('news-text').value.trim();
+  const type = document.getElementById('news-type').value;
+  if (!text) { showToast('⚠️ Kérem írja be a bejelentés szövegét'); return; }
+  mockAnnouncements.push({ id: Date.now(), type, text });
+  document.getElementById('news-text').value = '';
+  renderAnnouncements();
+  renderNewsAdmin();
+  showToast('✅ Bejelentés közzétéve – minden látogató látja!');
+}
+
+function removeAnnouncement(id) {
+  mockAnnouncements = mockAnnouncements.filter(a => a.id !== id);
+  renderAnnouncements();
+  renderNewsAdmin();
+  showToast('🗑️ Bejelentés eltávolítva');
+}
+
+function renderNewsAdmin() {
+  const el = document.getElementById('news-list-admin');
+  if (!el) return;
+  if (!mockAnnouncements.length) {
+    el.innerHTML = '<p style="color:var(--light);font-size:.85rem">Nincs aktív bejelentés.</p>';
+    return;
+  }
+  const typeLabels = { urgent:'🚨 Sürgős/Zárva', info:'ℹ️ Tájékoztató', good:'🎉 Örömhír' };
+  el.innerHTML = mockAnnouncements.map(a => `
+    <div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid rgba(82,183,136,.15);border-radius:10px;padding:12px 16px;margin-bottom:8px">
+      <span class="status-pill pill-confirmed" style="white-space:nowrap">${typeLabels[a.type]||a.type}</span>
+      <span style="flex:1;font-size:.88rem;color:var(--dark)">${a.text}</span>
+      <button class="action-btn red" onclick="removeAnnouncement(${a.id})">✕ Levesz</button>
+    </div>`).join('');
+}
+
+// ─── Mai nap kiemelése a nyitvatartásban ─────────────────────────────────────
+function highlightToday() {
+  const ids = ['hr-sun','hr-mon','hr-tue','hr-wed','hr-thu','hr-fri','hr-sat'];
+  const todayIdx = new Date().getDay(); // 0=vas
+  const el = document.getElementById(ids[todayIdx]);
+  if (el) {
+    el.style.background = 'rgba(82,183,136,.15)';
+    el.style.borderRadius = '8px';
+    el.style.padding = '8px 10px';
+    const timeEl = el.querySelector('.time');
+    if (timeEl) timeEl.innerHTML += ' <span style="font-size:.7rem;background:rgba(82,183,136,.3);padding:2px 7px;border-radius:10px;color:#b7e4c7">Ma</span>';
+  }
+}
+
 // ═══════════════════════ STATE ═══════════════════════
 let booking = { doctorId:null, doctorName:'', date:'', time:'', petName:'', petType:'', petBreed:'', ownerName:'', ownerPhone:'', ownerEmail:'', priority:'routine', anamnesis:'' };
 let currentWeekOffset = 0;
@@ -1135,6 +1366,7 @@ function switchAdminTab(name) {
   event.target.classList.add('active');
   if(name==='email-preview') renderEmailPreviewTab();
   if(name==='invoice') renderProductPills();
+  if(name==='news') renderNewsAdmin();
 }
 
 function renderAdminTables() {
@@ -1377,6 +1609,8 @@ document.querySelectorAll('.modal-bg').forEach(bg=>{
 // Init
 renderWeek();
 updateTotal();
+renderAnnouncements();
+highlightToday();
 </script>
 </body>
 </html>
